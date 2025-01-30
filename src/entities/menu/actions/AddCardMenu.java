@@ -22,28 +22,25 @@ public class AddCardMenu implements Action {
         }
     }
 
-
     @Override
     public void execute() {
-        System.out.println("Ajouter une nouvelle carte");
-        System.out.println("Titre");
-        String titel = scanner.nextLine();
+        System.out.println("Ajouter une nouvelle carte à la todo");
+        System.out.println("Ajouter un titre à la todo: ");
+        String title = scanner.nextLine();
 
-        System.out.println("Status (TODO, DOING, DONE)");
+        System.out.println("Choisseez un status à cette todo (TODO, DOING, DONE)");
         String statusStr = scanner.nextLine();
         Status status = Status.valueOf(statusStr.toUpperCase());
 
-        Card newCard = new Card(Optional.empty(), titel, status, false);
+        Card newCard = new Card(Optional.empty(), title, status, false);
 
-         try {
-            if (cardDao.save(newCard)) {
-                System.out.println("✅ Carte ajoutée avec succès !");
-            } else {
-                System.out.println("❌ Échec de l'ajout.");
-            }
+        try {
+            cardDao.save(newCard);
+            System.out.println("Carte ajoutée avec succès !");
+
         } catch (Exception e) {
-            System.out.println("❌ Erreur : " + e.getMessage());
-        }
+            System.out.println("Erreur : " + e.getMessage());
 
+        }
     }
 }

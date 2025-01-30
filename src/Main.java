@@ -17,7 +17,7 @@ public class Main {
 
             cardDAO cardDao = new cardDAO(connectionDB.getConnection());
 
-            System.out.println("\nAjout à la db\n");
+            /* System.out.println("\nAjout à la db\n");
             Card card1 = new Card(Optional.empty(), "Faire les courses", Status.TODO, false);
             cardDao.save(card1);
 
@@ -25,12 +25,12 @@ public class Main {
 
             for (Card card : cards) {
                 System.out.println(card);
-            }
+            } */
 
-            /*
-             * Menu menu = new Menu();
-             * menu.display();
-             */
+            
+             Menu menu = new Menu();
+             menu.display();
+             
 
             Card card = new cardDAO(connectionDB.getConnection()).findById(1);
             System.out.println(card);

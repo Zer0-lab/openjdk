@@ -15,9 +15,8 @@ import interfaces.factories.menu.Action;
 public class Menu {
     private final Map<Integer, Action> actions;
     private final Scanner scanner;
-    private int choice;
 
-    public Menu(){
+    public Menu(){;
         actions = new HashMap<>();
         scanner = new Scanner(System.in);
 
@@ -30,7 +29,7 @@ public class Menu {
     }
 
     public void display(){
-        choice = 0;
+        int choice;
         do {
             System.out.println("📝 Menu");
             System.out.println("1. Afficher toutes les cartes");

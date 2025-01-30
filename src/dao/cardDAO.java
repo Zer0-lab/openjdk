@@ -48,6 +48,21 @@ public class cardDAO {
         }
     }
 
+    public List<Card> findAllNotDone() throws Exception {
+        List<Card> cards = new ArrayList<Card>();
+        String query = "SELECT * FROM todos WHERE is_done = false";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Card card = new ResultSetCardFactory(resultSet).createCard();
+                cards.add(card);
+            }
+        }
+        return cards;
+    }
+
     public Boolean create(Card card) throws Exception {
         String query = "INSERT INTO todos (title, status, is_done) VALUES (?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
