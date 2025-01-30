@@ -24,8 +24,8 @@ public class Menu {
 
     public Menu() throws Exception {
         this.scanner = new Scanner(System.in);
-        this.databaseConfig = new DatabaseConfig(); // ✅ Gestion propre de la connexion
-        this.connection = databaseConfig.getConnection(); // ✅ Ouvre la connexion
+        this.databaseConfig = new DatabaseConfig();
+        this.connection = databaseConfig.getConnection();
         this.cardDao = new cardDAO(connection);
         this.actions = new HashMap<>();
 
