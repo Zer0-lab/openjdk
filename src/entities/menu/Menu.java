@@ -57,8 +57,8 @@ public class Menu {
                 System.out.println("Choix invalide");
             }
         } while (choice != 6);
-
-        scanner.close();
+        closeRessources();
+       
     }
 
     private int getUserChoice() {
@@ -67,6 +67,12 @@ public class Menu {
             scanner.next();
         }
         return scanner.nextInt();
+    }
+
+    private void closeRessources(){
+        System.out.println("Fermeture de la connexion à la base de données...");
+        scanner.close();
+        databaseConfig.closeConnection();
     }
     
 }
