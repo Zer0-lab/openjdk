@@ -2,7 +2,7 @@
 
 echo "📝 Configuration de Git"
 git config --global user.name "VotreNom"
-git config --global user.email "VotreEmail@example.com"
+git config --glooriginbal user.email "VotreEmail@example.com"
 git config --list
 
 echo "\n🌱 Initialisation et Clonage"
