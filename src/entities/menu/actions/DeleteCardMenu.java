@@ -18,7 +18,7 @@ public class DeleteCardMenu implements Action {
             e.printStackTrace();
         }
     }
-    
+
     @Override
     public void execute() {
         System.out.println("Suppression d'une carte..");
@@ -28,18 +28,28 @@ public class DeleteCardMenu implements Action {
             System.out.println("Veuillez entrer un ID valide : ");
             scanner.next();
         }
-        int id = scanner.nextInt(); 
+        int id = scanner.nextInt();
         scanner.nextLine();
 
         try {
-            boolean result = cardDao.delete(id);
-            if(result){
-                System.out.println("Carte supprimée avec succès !");
+            System.out.println("êtes-vous sûr de vouloir supprimer la carte ? (O/N)");
+            String response = scanner.nextLine();
+
+            if (!response.equalsIgnoreCase("O")) {
+                System.out.println("Suppression annulée.");
+                return;
             } else {
-                System.out.println("Carte non trouvée.");
+                boolean result = cardDao.delete(id);
+                if (result) {
+
+                    System.out.println("Carte supprimée avec succès !");
+                } else {
+                    System.out.println("Carte non trouvée.");
+                }
             }
+
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
         }
-    }   
+    }
 }
