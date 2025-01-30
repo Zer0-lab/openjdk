@@ -8,6 +8,7 @@ import java.util.List;
 
 import config.DatabaseConfig;
 import entities.Card;
+import enums.Status;
 import factories.entities.card.ResultSetCardFactory;
 
 public class cardDAO {
@@ -84,6 +85,9 @@ public class cardDAO {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, card.getTitle());
             statement.setString(2, card.getStatus().toString());
+            if (card.getStatus() == Status.DONE) {
+                card.setIs_done(true);
+            }
             statement.setBoolean(3, card.getIs_done());
             statement.setInt(4, card.getId().get());
 
@@ -93,5 +97,15 @@ public class cardDAO {
 
     public Boolean save(Card card) throws Exception {
         return card.getId().isPresent() ? this.update(card) : this.create(card);
+    }
+
+    public Boolean delete(Integer id) throws Exception {
+        String query = "DELETE FROM todos WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+
+            return statement.executeUpdate() > 0;
+        }
     }
 }
