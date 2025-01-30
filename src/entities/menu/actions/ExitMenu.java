@@ -6,7 +6,7 @@ public class ExitMenu implements Action {
     
     @Override
     public void execute() {
-        System.out.println("👋 Merci d'avoir utilisé l'application !");
+        System.out.println(" Merci d'avoir utilisé l'application !");
         System.exit(0);
     }
     

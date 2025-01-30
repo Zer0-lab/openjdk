@@ -6,7 +6,7 @@ public class DeleteCardMenu implements Action {
     
     @Override
     public void execute() {
-        System.out.println("5.Supprimer une todo");
+        System.out.println("Suppression d'une carte..");
     }
     
 }

@@ -6,7 +6,7 @@ public class AllCardMenu implements Action {
 
     @Override
     public void execute() {
-        System.out.println("🔹 1.Lister les todos à faire");
+        System.out.println("Liste des todos à faire:");
     }
     
 }

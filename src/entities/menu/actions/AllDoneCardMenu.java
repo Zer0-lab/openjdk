@@ -6,7 +6,7 @@ public class AllDoneCardMenu implements Action {
 
     @Override
     public void execute() {
-        System.out.println("3.Lister les todos terminées");
+        System.out.println("Affichage des cartes...");
     }
     
 }
