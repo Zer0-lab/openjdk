@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import config.DatabaseConfig;
 import entities.Card;
 import enums.Status;
 import factories.entities.card.ResultSetCardFactory;

@@ -2,21 +2,15 @@ package entities.menu.actions;
 
 import java.util.Scanner;
 
+import abstracts.menu.AbstractAction;
 import config.DatabaseConfig;
 import dao.cardDAO;
 import interfaces.factories.menu.Action;
 
-public class DeleteCardMenu implements Action {
-    private DatabaseConfig connectionDB = new DatabaseConfig();
-    private cardDAO cardDao;
-    private Scanner scanner = new Scanner(System.in);
+public class DeleteCardMenu extends AbstractAction {
 
-    public DeleteCardMenu() {
-        try {
-            this.cardDao = new cardDAO(connectionDB.getConnection());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public DeleteCardMenu(Scanner scanner, cardDAO cardDao) {
+       super(scanner, cardDao);
     }
 
     @Override

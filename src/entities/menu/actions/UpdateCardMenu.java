@@ -4,24 +4,18 @@ import enums.Status;
 import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
+
+import abstracts.menu.AbstractAction;
 import entities.Card;
 
 import config.DatabaseConfig;
 import dao.cardDAO;
 import interfaces.factories.menu.Action;
 
-public class UpdateCardMenu implements Action {
+public class UpdateCardMenu extends AbstractAction {
 
-    private DatabaseConfig connectionDB = new DatabaseConfig();
-    private cardDAO cardDao;
-    private Scanner scanner = new Scanner(System.in);
-
-    public UpdateCardMenu() {
-        try {
-            this.cardDao = new cardDAO(connectionDB.getConnection());
-        } catch (Exception e) {
-            throw new RuntimeException("Erreur de connexion à la base de données", e);
-        }
+    public UpdateCardMenu(Scanner scanner, cardDAO cardDao) {
+        super(scanner, cardDao);
     }
 
     @Override
@@ -39,15 +33,16 @@ public class UpdateCardMenu implements Action {
 
         try {
             Card existinCard = cardDao.findById(id);
-            
+
             System.out.println("Entrez un nouveau titre pour la todo : (actuel : " + existinCard.getTitle() + ")");
             String title = scanner.nextLine();
 
-            if(!title.isEmpty()){
+            if (!title.isEmpty()) {
                 existinCard.setTitle(title);
             }
 
-            System.out.println("Entrez un nouveau status pour la todo (TODO, DOING, DONE): (actuel : " + existinCard.getStatus() + ")");
+            System.out.println("Entrez un nouveau status pour la todo (TODO, DOING, DONE): (actuel : "
+                    + existinCard.getStatus() + ")");
             String statusStr = scanner.nextLine();
             Status status = statusStr.isEmpty() ? existinCard.getStatus() : Status.valueOf(statusStr.toUpperCase());
 
@@ -59,5 +54,5 @@ public class UpdateCardMenu implements Action {
             System.out.println("Erreur : " + e.getMessage());
         }
     }
-    
+
 }

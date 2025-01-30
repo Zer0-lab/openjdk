@@ -1,9 +1,12 @@
 package entities.menu;
 
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import config.DatabaseConfig;
+import dao.cardDAO;
 import entities.menu.actions.AddCardMenu;
 import entities.menu.actions.AllCardMenu;
 import entities.menu.actions.AllDoneCardMenu;
@@ -15,16 +18,22 @@ import interfaces.factories.menu.Action;
 public class Menu {
     private final Map<Integer, Action> actions;
     private final Scanner scanner;
+    private final DatabaseConfig databaseConfig;
+    private final cardDAO cardDao;
+    private final Connection connection;
 
-    public Menu(){;
-        actions = new HashMap<>();
-        scanner = new Scanner(System.in);
+    public Menu() throws Exception {
+        this.scanner = new Scanner(System.in);
+        this.databaseConfig = new DatabaseConfig(); // ✅ Gestion propre de la connexion
+        this.connection = databaseConfig.getConnection(); // ✅ Ouvre la connexion
+        this.cardDao = new cardDAO(connection);
+        this.actions = new HashMap<>();
 
-        actions.put(1, new AllCardMenu());
-        actions.put(2, new AllDoneCardMenu());
-        actions.put(3, new AddCardMenu());
-        actions.put(4, new UpdateCardMenu());
-        actions.put(5, new DeleteCardMenu());
+        actions.put(1, new AllCardMenu(scanner, cardDao));
+        actions.put(2, new AllDoneCardMenu(scanner, cardDao));
+        actions.put(3, new AddCardMenu(scanner, cardDao)); 
+        actions.put(4, new UpdateCardMenu(scanner, cardDao)); 
+        actions.put(5, new DeleteCardMenu(scanner, cardDao)); 
         actions.put(6, new ExitMenu());
     }
 

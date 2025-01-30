@@ -4,22 +4,15 @@ import enums.Status;
 import java.util.Optional;
 import java.util.Scanner;
 
-import config.DatabaseConfig;
+import abstracts.menu.AbstractAction;
 import dao.cardDAO;
 import entities.Card;
 import interfaces.factories.menu.Action;
 
-public class AddCardMenu implements Action {
-    private DatabaseConfig connectionDB = new DatabaseConfig();
-    private Scanner scanner = new Scanner(System.in);
-    private cardDAO cardDao;
+public class AddCardMenu extends AbstractAction {
 
-    public AddCardMenu() {
-        try {
-            this.cardDao = new cardDAO(connectionDB.getConnection());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public AddCardMenu(Scanner scanner, cardDAO cardDao) {
+        super(scanner, cardDao);
     }
 
     @Override
@@ -35,7 +28,7 @@ public class AddCardMenu implements Action {
 
         System.out.println("Voulez-vous ajouter cette carte ? (O/N)");
         String response = scanner.nextLine();
-        
+
         while(!response.equalsIgnoreCase("O") && !response.equalsIgnoreCase("N")){
             System.out.println("Veuillez entrer une réponse valide (O/N)");
             response = scanner.nextLine();
@@ -52,7 +45,6 @@ public class AddCardMenu implements Action {
                 System.out.println("Erreur : " + e.getMessage());
 
             }
-
         }
     }
 }
