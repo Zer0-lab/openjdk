@@ -28,18 +28,30 @@ public class AddCardMenu implements Action {
         System.out.println("Ajouter un titre à la todo: ");
         String title = scanner.nextLine();
 
-        System.out.println("Choisseez un status à cette todo (TODO, DOING, DONE)");
+        System.out.println("Quelle sera le status à cette todo (TODO, DOING, DONE)");
         String statusStr = scanner.nextLine();
         Status status = Status.valueOf(statusStr.toUpperCase());
-
         Card newCard = new Card(Optional.empty(), title, status, false);
 
-        try {
-            cardDao.save(newCard);
-            System.out.println("Carte ajoutée avec succès !");
+        System.out.println("Voulez-vous ajouter cette carte ? (O/N)");
+        String response = scanner.nextLine();
+        
+        while(!response.equalsIgnoreCase("O") && !response.equalsIgnoreCase("N")){
+            System.out.println("Veuillez entrer une réponse valide (O/N)");
+            response = scanner.nextLine();
+        }
+        if (!response.equalsIgnoreCase("O")) {
+            System.out.println("Ajout annulé.");
+            return;
+        } else {
+            try {
+                cardDao.save(newCard);
+                System.out.println("Carte ajoutée avec succès !");
 
-        } catch (Exception e) {
-            System.out.println("Erreur : " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Erreur : " + e.getMessage());
+
+            }
 
         }
     }
