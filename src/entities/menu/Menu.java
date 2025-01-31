@@ -1,6 +1,5 @@
 package entities.menu;
 
-import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -38,7 +37,7 @@ public class Menu {
     public void display(){
         int choice;
         do {
-            System.out.println("📝 Menu");
+            System.out.println("Menu");
             System.out.println("1. Afficher toutes les cartes");
             System.out.println("2. Afficher les cartes terminées");
             System.out.println("3. Ajouter une todo");

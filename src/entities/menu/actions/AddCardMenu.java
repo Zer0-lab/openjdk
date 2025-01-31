@@ -50,7 +50,6 @@ public class AddCardMenu extends AbstractAction {
 
             } catch (Exception e) {
                 System.out.println("Erreur : " + e.getMessage());
-
             }
         }
     }

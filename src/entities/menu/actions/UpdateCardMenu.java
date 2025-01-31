@@ -3,14 +3,10 @@ package entities.menu.actions;
 import enums.Status;
 import java.util.Scanner;
 
-import javax.management.RuntimeErrorException;
-
 import abstracts.menu.AbstractAction;
 import entities.Card;
 
-import config.DatabaseConfig;
 import dao.cardDAO;
-import interfaces.factories.menu.Action;
 
 public class UpdateCardMenu extends AbstractAction {
 
@@ -56,7 +52,7 @@ public class UpdateCardMenu extends AbstractAction {
                 response = scanner.nextLine();
             }
 
-            boolean result = cardDao.save(updatedCard);
+            cardDao.save(updatedCard);
             System.out.println("Appuyez sur une touche pour continuer...");
             scanner.nextLine();
 

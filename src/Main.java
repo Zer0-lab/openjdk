@@ -1,14 +1,8 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 
 import config.DatabaseConfig;
 import dao.cardDAO;
-import entities.Card;
 import entities.menu.Menu;
-import enums.Status;
 
 public class Main {
     public static void main(String[] args) {

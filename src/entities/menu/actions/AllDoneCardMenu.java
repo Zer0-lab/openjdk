@@ -31,7 +31,7 @@ public class AllDoneCardMenu extends AbstractAction {
                 scanner.nextLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erreur : " + e.getMessage());
         }
     }
 }

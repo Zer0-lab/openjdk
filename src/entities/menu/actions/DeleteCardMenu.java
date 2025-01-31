@@ -3,9 +3,8 @@ package entities.menu.actions;
 import java.util.Scanner;
 
 import abstracts.menu.AbstractAction;
-import config.DatabaseConfig;
+
 import dao.cardDAO;
-import interfaces.factories.menu.Action;
 
 public class DeleteCardMenu extends AbstractAction {
 
