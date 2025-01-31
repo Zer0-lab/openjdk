@@ -10,11 +10,12 @@ public class Main {
         try {
             DatabaseConfig connectionDB = new DatabaseConfig();
             cardDAO cardDao = new cardDAO(connectionDB.getConnection());
+            System.out.println("\n");
 
              Menu menu = new Menu(scanner,connectionDB, cardDao);
              menu.display();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Erreur : " + e.getMessage());
         }
     }
 }
