@@ -47,8 +47,18 @@ public class UpdateCardMenu extends AbstractAction {
             Status status = statusStr.isEmpty() ? existinCard.getStatus() : Status.valueOf(statusStr.toUpperCase());
 
             Card updatedCard = new Card(existinCard.getId(), existinCard.getTitle(), status, existinCard.getIs_done());
+            
+            System.out.println("Voulez-vous modifier cette carte ? (O/N)");
+            String response = scanner.nextLine();
+
+            while(!response.equalsIgnoreCase("O") && !response.equalsIgnoreCase("N")){
+                System.out.println("Veuillez entrer une réponse valide (O/N)");
+                response = scanner.nextLine();
+            }
 
             boolean result = cardDao.save(updatedCard);
+            System.out.println("Appuyez sur une touche pour continuer...");
+            scanner.nextLine();
 
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());

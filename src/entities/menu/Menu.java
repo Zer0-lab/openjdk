@@ -20,13 +20,11 @@ public class Menu {
     private final Scanner scanner;
     private final DatabaseConfig databaseConfig;
     private final cardDAO cardDao;
-    private final Connection connection;
 
-    public Menu() throws Exception {
-        this.scanner = new Scanner(System.in);
-        this.databaseConfig = new DatabaseConfig();
-        this.connection = databaseConfig.getConnection();
-        this.cardDao = new cardDAO(connection);
+    public Menu(Scanner Scanner, DatabaseConfig databaseConfig, cardDAO cardDAO) throws Exception {
+        this.scanner = Scanner;
+        this.databaseConfig = databaseConfig;
+        this.cardDao = cardDAO;
         this.actions = new HashMap<>();
 
         actions.put(1, new AllCardMenu(scanner, cardDao));
@@ -50,6 +48,7 @@ public class Menu {
             System.out.print("Votre choix : ");
 
             choice = getUserChoice();
+            scanner.nextLine();
 
             if (actions.containsKey(choice)) {
                 actions.get(choice).execute();
