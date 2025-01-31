@@ -28,19 +28,12 @@ public class AddCardMenu extends AbstractAction {
             }
         } while (title.isEmpty());
 
-        System.out.println("Quelle sera le status à cette todo (TODO, DOING, DONE)");
-        String statusStr = scanner.nextLine();
-        Status status = Status.valueOf(statusStr.toUpperCase());
+        Status statusStr = isEnumValid(Status.class, "Choisissez un statut (TODO, DOING, DONE) :");
+        Status status = statusStr;
+
         Card newCard = new Card(Optional.empty(), title, status, false);
 
-        System.out.println("Voulez-vous ajouter cette carte ? (O/N)");
-        String response = scanner.nextLine();
-
-        while (!response.equalsIgnoreCase("O") && !response.equalsIgnoreCase("N")) {
-            System.out.println("Veuillez entrer une réponse valide (O/N)");
-            response = scanner.nextLine();
-        }
-        if (!response.equalsIgnoreCase("O")) {
+        if (!isResponseValid("Voulez-vous ajouter cette carte ? ")) {
             System.out.println("Ajout annulé.");
             return;
         } else {

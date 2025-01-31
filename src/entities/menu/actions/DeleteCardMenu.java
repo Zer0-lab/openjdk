@@ -9,7 +9,7 @@ import dao.cardDAO;
 public class DeleteCardMenu extends AbstractAction {
 
     public DeleteCardMenu(Scanner scanner, cardDAO cardDao) {
-       super(scanner, cardDao);
+        super(scanner, cardDao);
     }
 
     @Override
@@ -24,14 +24,13 @@ public class DeleteCardMenu extends AbstractAction {
         int id = scanner.nextInt();
         scanner.nextLine();
 
-        try {
-            System.out.println("êtes-vous sûr de vouloir supprimer la carte ? (O/N)");
-            String response = scanner.nextLine();
+        if (!isResponseValid("Êtes-vous sûr de vouloir supprimer la carte ? ")) {
+            System.out.println("Suppression annulée.");
+            return;
+            
+        } else {
 
-            if (!response.equalsIgnoreCase("O")) {
-                System.out.println("Suppression annulée.");
-                return;
-            } else {
+            try {
                 boolean result = cardDao.delete(id);
                 if (result) {
 
@@ -39,10 +38,9 @@ public class DeleteCardMenu extends AbstractAction {
                 } else {
                     System.out.println("Carte non trouvée.");
                 }
+            } catch (Exception e) {
+                System.out.println("Erreur : " + e.getMessage());
             }
-
-        } catch (Exception e) {
-            System.out.println("Erreur : " + e.getMessage());
         }
     }
 }

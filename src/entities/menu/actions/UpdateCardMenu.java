@@ -39,23 +39,20 @@ public class UpdateCardMenu extends AbstractAction {
 
             System.out.println("Entrez un nouveau status pour la todo (TODO, DOING, DONE): (actuel : "
                     + existinCard.getStatus() + ")");
-            String statusStr = scanner.nextLine();
-            Status status = statusStr.isEmpty() ? existinCard.getStatus() : Status.valueOf(statusStr.toUpperCase());
+
+            Status statusStr = isEnumValid(Status.class, "");
+            Status status = statusStr;
 
             Card updatedCard = new Card(existinCard.getId(), existinCard.getTitle(), status, existinCard.getIs_done());
-            
-            System.out.println("Voulez-vous modifier cette carte ? (O/N)");
-            String response = scanner.nextLine();
 
-            while(!response.equalsIgnoreCase("O") && !response.equalsIgnoreCase("N")){
-                System.out.println("Veuillez entrer une réponse valide (O/N)");
-                response = scanner.nextLine();
+            if (!isResponseValid("Voulez-vous modifier cette carte ? (O/N)")) {
+                System.out.println("Modification annulée.");
+                return;
+            } else {
+                cardDao.save(updatedCard);
+                System.out.println("Appuyez sur une touche pour continuer...");
+                scanner.nextLine();
             }
-
-            cardDao.save(updatedCard);
-            System.out.println("Appuyez sur une touche pour continuer...");
-            scanner.nextLine();
-
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());
         }
